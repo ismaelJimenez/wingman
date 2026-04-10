@@ -18,6 +18,7 @@
 | tasks | Port from SpecKit |
 | tasks-to-issues | Port from SpecKit |
 | using-wingman | Port from Superpowers |
+| hooks | Port from Superpowers |
 
 ## Links
 
