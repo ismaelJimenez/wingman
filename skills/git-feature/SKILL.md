@@ -4,8 +4,6 @@ description: Create a feature branch with sequential or timestamp numbering
 metadata:
   author: "github-spec-kit"
   source: "speckit-git-feature"
-user-invocable: true
-disable-model-invocation: true
 ---
 
 # Create Feature Branch

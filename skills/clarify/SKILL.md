@@ -5,8 +5,6 @@ argument-hint: "Optional areas to clarify in the spec"
 metadata:
   author: "github-spec-kit"
   source: "speckit-clarify"
-user-invocable: true
-disable-model-invocation: true
 ---
 
 

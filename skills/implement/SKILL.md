@@ -5,8 +5,6 @@ argument-hint: "Optional implementation guidance or task filter"
 metadata:
   author: "github-spec-kit"
   source: "speckit-implement"
-user-invocable: true
-disable-model-invocation: true
 ---
 
 

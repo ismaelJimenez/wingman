@@ -5,8 +5,6 @@ argument-hint: "Optional guidance for the planning phase"
 metadata:
   author: "github-spec-kit"
   source: "speckit-plan"
-user-invocable: true
-disable-model-invocation: true
 ---
 
 

@@ -4,8 +4,6 @@ description: Validate current branch follows feature branch naming conventions
 metadata:
   author: "github-spec-kit"
   source: "speckit-git-validate"
-user-invocable: true
-disable-model-invocation: true
 ---
 
 # Validate Feature Branch

@@ -5,8 +5,6 @@ argument-hint: "Optional filter or label for GitHub issues"
 metadata:
   author: "github-spec-kit"
   source: "speckit-taskstoissues"
-user-invocable: true
-disable-model-invocation: true
 ---
 
 
