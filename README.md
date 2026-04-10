@@ -71,9 +71,10 @@ copilot plugin update wingman
 
 ## Usage
 
-Invoke any skill by name:
+Start by initializing your project, then invoke skills by name:
 
 ```
+/wingman:init
 /wingman:specify Build a REST API for user management
 /wingman:plan
 /wingman:tasks
