@@ -10,6 +10,7 @@ A comprehensive feature development toolkit providing structured workflows for s
 
 Wingman guides you through the full feature development lifecycle:
 
+0. **Init** — Initialize project directory with configuration and preferences
 1. **Brainstorm** — Explore ideas with structured brainstorming sessions
 2. **Specify** — Create feature specifications from natural language descriptions
 3. **Clarify** — Identify and resolve underspecified areas via targeted questions
@@ -81,6 +82,7 @@ Invoke any skill by name:
 
 ### Recommended Workflow Order
 
+0. `wingman:init` — Initialize project directory and preferences (one-time)
 1. `wingman:constitution` — Define project principles (optional, one-time)
 2. `wingman:specify` — Create feature specification
 3. `wingman:clarify` — Resolve ambiguities in the spec
@@ -95,6 +97,13 @@ During development, run `/reload-plugins` after edits to pick up changes.
 
 ## Components
 
+### Project Setup Skills
+
+| Skill | Description |
+|-------|-------------|
+| `init` | Initialize `.wingman/` project directory with configuration, templates, and git setup |
+| `constitution` | Define project principles and governance |
+
 ### Workflow Skills
 
 | Skill | Description |
@@ -106,7 +115,6 @@ During development, run `/reload-plugins` after edits to pick up changes.
 | `implement` | Execute tasks phase-by-phase |
 | `checklist` | Generate quality checklists |
 | `analyze` | Cross-artifact consistency analysis |
-| `constitution` | Define project principles and governance |
 | `tasks-to-issues` | Convert tasks to GitHub issues |
 
 ### Git Skills (auto-invoked)
