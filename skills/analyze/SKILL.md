@@ -5,6 +5,8 @@ argument-hint: "Optional focus areas for analysis"
 metadata:
   author: "github-spec-kit"
   source: "speckit-analyze"
+user-invocable: true
+disable-model-invocation: true
 ---
 
 

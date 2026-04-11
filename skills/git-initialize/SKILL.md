@@ -4,6 +4,8 @@ description: Initialize a Git repository with an initial commit
 metadata:
   author: "github-spec-kit"
   source: "speckit-git-initialize"
+user-invocable: true
+disable-model-invocation: true
 ---
 
 # Initialize Git Repository

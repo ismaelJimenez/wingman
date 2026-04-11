@@ -5,6 +5,8 @@ argument-hint: "Describe the feature you want to specify"
 metadata:
   author: "github-spec-kit"
   source: "speckit-specify"
+user-invocable: true
+disable-model-invocation: true
 ---
 
 

@@ -5,6 +5,8 @@ argument-hint: "Principles or values for the project constitution"
 metadata:
   author: "github-spec-kit"
   source: "speckit-constitution"
+user-invocable: true
+disable-model-invocation: true
 ---
 
 

@@ -4,6 +4,8 @@ description: Auto-commit changes after a Wingman skill completes
 metadata:
   author: github-spec-kit
   source: speckit-git-commit
+user-invocable: true
+disable-model-invocation: true
 ---
 
 # Auto-Commit Changes

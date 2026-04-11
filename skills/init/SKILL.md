@@ -5,6 +5,8 @@ argument-hint: "Optional: preferences like 'timestamp numbering' or 'no git'"
 metadata:
   author: "github-spec-kit"
   source: "speckit-init"
+user-invocable: true
+disable-model-invocation: true
 ---
 
 

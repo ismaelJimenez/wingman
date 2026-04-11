@@ -5,6 +5,8 @@ argument-hint: "Domain or focus area for the checklist"
 metadata:
   author: "github-spec-kit"
   source: "speckit-checklist"
+user-invocable: true
+disable-model-invocation: true
 ---
 
 

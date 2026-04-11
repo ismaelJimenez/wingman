@@ -5,6 +5,8 @@ argument-hint: "Optional task generation constraints"
 metadata:
   author: "github-spec-kit"
   source: "speckit-tasks"
+user-invocable: true
+disable-model-invocation: true
 ---
 
 
