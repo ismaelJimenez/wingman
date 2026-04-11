@@ -23,7 +23,7 @@ You MUST create a task for each of these items and complete them in order:
 4. **Present problem framing, findings & recommendations** — in sections scaled to their complexity, get user approval after each section
 5. **Write brainstorm document** — save to `brainstorm/NN-topic-slug.md`
 6. **User reviews saved document** — ask user to review the brainstorm file before proceeding
-7. **Suggest next step** — present the explicit command to run `wingman:specify` with the brainstorm document path as input so the user can transition to specification when ready
+7. **Suggest next step** — present the explicit command to run `/wingman:specify` `brainstorm/NN-topic-slug.md`.
 
 ## Process Flow
 
@@ -37,10 +37,8 @@ flowchart TD
     J -- "yes" --> K["Write brainstorm doc"]
     K --> M{"User reviews saved document?"}
     M -- "changes requested" --> K
-    M -- "approved" --> N(("Suggest: wingman:specify (with brainstorm doc)"))
+    M -- "approved" --> N(("Suggest: /wingman:specify brainstorm/NN-topic-slug.md"))
 ```
-
-**The terminal state is suggesting the `wingman:specify` command with the brainstorm document path.** Do NOT invoke `wingman:specify` directly. Present the command for the user to run.
 
 ## The Process
 
@@ -90,8 +88,9 @@ Wait for the user's response. If they request changes, make them. Only proceed o
 
 **Next step:**
 
-- Present the command for the user to run: e.g., "Run `wingman:specify` with `brainstorm/NN-topic-slug.md`"
-- Do NOT invoke `wingman:specify` directly. The user decides when to proceed.
+Ask the user what they would like to do next, offering these choices:
+- "Run wingman:specify `brainstorm/NN-topic-slug.md` to create a spec from this brainstorm"
+- "I'm done for now"
 
 ## Brainstorm Document Structure
 
