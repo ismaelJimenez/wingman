@@ -5,7 +5,9 @@ description: "You MUST use this before any creative work - creating features, bu
 
 # Brainstorming Ideas Into Clarity
 
-Turn rough ideas into well-structured brainstorm documents through collaborative dialogue. The brainstorm document is the deliverable — it captures problem framing, approaches considered, decisions made, and open threads. From there, the user takes it to any downstream tool or workflow.
+Help turn ideas into well-structured brainstorm documents through natural collaborative dialogue. 
+
+Start by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the brainstorm results and get user approval.
 
 ## Pre-Execution
 
@@ -13,44 +15,84 @@ Invoke `wingman:git-commit` with event `before_brainstorm` before proceeding.
 
 ## Checklist
 
-Follow these steps in order. Do not skip steps.
+You MUST create a task for each of these items and complete them in order:
 
-1. **Explore project context** — read README, project docs, and files directly related to the topic; check recent commits only if the topic involves recently changed code
-2. **Check for related brainstorms** — scan `brainstorm/` for existing docs on similar topics, offer to update or create new
-3. **Assess complexity** — quick decision (2–3 options, clear trade-offs) or complex exploration (multiple subsystems, unclear constraints); scale the remaining steps accordingly
-4. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
-5. **Propose 2–3 approaches** — with trade-offs and a recommendation
-6. **Present findings & recommendations** — scaled to complexity, get user approval incrementally
-7. **User approves brainstorm summary** — confirm the session capture before writing
-8. **Write brainstorm document** — persist session summary to `brainstorm/NN-topic-slug.md`
-9. **Update overview** — create or refresh `brainstorm/00-overview.md` with index, open threads, parked ideas (skip for quick decisions if no overview exists yet)
-10. **Suggest next steps** — the brainstorm document can be taken to any downstream tool or workflow
+1. **Explore project context** — check files, docs, recent commits
+2. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
+3. **Propose 2–3 approaches** — with trade-offs and a recommendation
+4. **Present problem framing, findings & recommendations** — in sections scaled to their complexity, get user approval after each section
+5. **Write brainstorm document** — save to `brainstorm/NN-topic-slug.md`
+6. **User reviews saved document** — ask user to review the brainstorm file before proceeding
+7. **Transition to specification** — invoke `wingman:specify` to create a specification, passing the brainstorm document path as input so the specification skill has full context of the exploration
+
+## Process Flow
+
+```mermaid
+flowchart TD
+    A["Explore project context"] --> H["Ask clarifying questions (one at a time)"]
+    H --> G["Propose 2-3 approaches"]
+    G --> I["Present findings & recommendations"]
+    I --> J{"User approves?"}
+    J -- "no, revise" --> I
+    J -- "yes" --> K["Write brainstorm doc"]
+    K --> M{"User reviews saved document?"}
+    M -- "changes requested" --> K
+    M -- "approved" --> N(("wingman:specify (with brainstorm doc)"))
+```
+
+**The terminal state is invoking `wingman:specify`.** Do NOT invoke any other implementation skill. The ONLY skill you invoke after brainstorming is `wingman:specify`.
 
 ## The Process
 
-### Understanding the idea
+**Understanding the idea:**
 
-- Review README, project docs, and files directly related to the topic. Check recent commits only if the topic involves recently changed code. Limit context gathering to a few targeted reads.
-- Assess scope first: if the request covers multiple independent subsystems, flag it and help decompose into sub-topics before deep-diving. Each sub-topic goes through the normal flow.
-- One question per message. Prefer multiple choice. Focus on purpose, constraints, success criteria, edge cases, and dependencies.
+- Check out the current project state first (files, docs, recent commits)
+- Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.
+- If the project is too large for a single brainstorm session, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own brainstorm → spec → plan → tasks → implementation cycle.
+- For appropriately-scoped projects, ask questions one at a time to refine the idea
+- Prefer multiple choice questions when possible, but open-ended is fine too
+- Only one question per message - if a topic needs more exploration, break it into multiple questions
+- Focus on understanding: purpose, constraints, success criteria
 
-### Assessing complexity
+**Exploring approaches:**
 
-After initial context and questions, determine the scale:
+- Propose 2-3 different approaches with trade-offs
+- Present options conversationally with your recommendation and reasoning
+- Lead with your recommended option and explain why
 
-- **Quick decision** — 2–3 clear options, straightforward trade-offs: propose approaches immediately, write a lightweight document, skip overview update if no overview exists yet.
-- **Complex exploration** — multiple subsystems, unclear constraints, significant design decisions: follow the full process with incremental validation at each stage.
+**Presenting problem framing, findings & recommendations**
 
-### Exploring approaches
-
-- Propose 2–3 approaches with trade-offs, leading with the recommendation
-- Explore: core requirements vs. nice-to-have, error cases, integration points, success criteria
-
-### Presenting findings & recommendations
-
+- Once you believe you understand what you're building, present the findings and recommendations
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
 - Ask after each section whether it looks right so far
 - Cover: problem framing, approaches considered, recommended approach, trade-offs, open questions
+- Be ready to go back and clarify if something doesn't make sense
+
+**Working in existing codebases:**
+
+- Explore the current structure before proposing changes. Follow existing patterns.
+- Where existing code has problems that affect the work (e.g., a file that's grown too large, unclear boundaries, tangled responsibilities), include targeted improvements as part of the brainstorm - the way a good developer improves code they're working in.
+- Don't propose unrelated refactoring. Stay focused on what serves the current goal.
+
+## After the Brainstorm
+
+**Documentation:**
+
+- Write the validated brainstorm to `brainstorm/NN-topic-slug.md` — next sequential number (no gap-filling), slug is lowercase hyphenated 2–4 words
+  - (User preferences for brainstorm location override this default)
+- Use elements-of-style:writing-clearly-and-concisely skill if available
+
+**User Review Gate:**
+Ask the user to review the written document before proceeding:
+
+> "Brainstorm saved to `<path>`. Review it and let me know if anything needs changing — once approved, I'll invoke `wingman:specify` to turn it into a specification."
+
+Wait for the user's response. If they request changes, make them. Only proceed once the user approves.
+
+**Specification:**
+
+- Invoke the wingman:specify skill to create a detailed specification
+- Do NOT invoke any other skill. wingman:specify is the next step.
 
 ## Brainstorm Document Structure
 
@@ -82,78 +124,6 @@ After initial context and questions, determine the scale:
 
 **Status values:** `active` (being pursued), `parked` (may revisit), `abandoned` (not pursuing), `completed` (clear decision reached)
 
-## Overview Document Structure
-
-`brainstorm/00-overview.md` provides a navigable index of all sessions:
-
-```markdown
-# Brainstorm Overview
-
-Last updated: YYYY-MM-DD
-
-## Sessions
-
-| # | Date | Topic | Status |
-|---|------|-------|--------|
-| 01 | YYYY-MM-DD | topic-slug | completed |
-
-## Open Threads
-- [Thread description] (from #NN)
-
-## Parked Ideas
-- [Idea description] (#NN)
-  Reason: [why parked]
-```
-
-## Revisit Detection
-
-During step 2, scan `brainstorm/` for existing `NN-*.md` files. Compare the current topic against existing slugs by keyword overlap. If a related document is found, ask the user: **create new** or **update existing**.
-
-If updating, append a new dated section to the existing document instead of creating a new file:
-
-```markdown
----
-
-## Revisit: YYYY-MM-DD
-
-### Updated Problem Framing
-[How understanding has evolved]
-
-### New Approaches Considered
-...
-
-### Updated Decision
-...
-
-### Open Threads
-- [New or updated threads]
-```
-
-## When to Skip Brainstorming
-
-Not every task needs a brainstorm session. Skip this skill when:
-
-- The task is a bug fix with a clear root cause
-- Explicit specs exist that leave no design decisions
-- The change is purely mechanical (rename, move, reformat)
-
-If the task does not involve design decisions or trade-offs, skip this skill.
-
-## Writing the Brainstorm Document
-
-Write the brainstorm document at session end — this step is NOT optional.
-
-- **Naming:** `brainstorm/NN-topic-slug.md` — next sequential number (no gap-filling), slug is lowercase hyphenated 2–4 words
-- **Status:** determined by session outcome (see status values above)
-- **Format:** use the Brainstorm Document Structure above
-- **Persist:** write the document to disk
-
-## Updating the Overview
-
-Update the overview after every brainstorm write or update — this step is NOT optional for complex explorations. For quick decisions, skip if no overview exists yet.
-
-Regenerate `brainstorm/00-overview.md` by scanning all `NN-*.md` files — extract date, status, open threads, and parked ideas. Build using the Overview Document Structure above.
-
 ## Post-Execution
 
 Invoke `wingman:git-commit` after completion with event name `after_brainstorm`.
@@ -163,9 +133,11 @@ Invoke `wingman:git-commit` after completion with event name `after_brainstorm`.
 If the session had no meaningful interaction (no approaches explored, no clarifying questions answered), do NOT prompt to save.
 
 For sessions with meaningful interaction, ask: **"Save this brainstorm session?"**
-- **Save as parked** — write document with status `parked`, update overview
-- **Save as abandoned** — write document with status `abandoned`, update overview
+- **Save as parked** — write document with status `parked`
+- **Save as abandoned** — write document with status `abandoned`
 - **Discard** — no artifacts created
+
+Do NOT invoke `wingman:specify` for incomplete sessions. The brainstorm must be fully approved before transitioning to specification.
 
 ## Key Principles
 
@@ -174,6 +146,4 @@ For sessions with meaningful interaction, ask: **"Save this brainstorm session?"
 - **YAGNI ruthlessly** — remove unnecessary features from consideration
 - **Explore alternatives** — always propose 2–3 approaches before settling
 - **Incremental validation** — present sections, get approval before moving on
-- **Capture decisions** — record what was decided and why, not just the final choice
-- **Scale to complexity** — lightweight process for quick decisions, full ceremony for complex explorations
-- **Stay focused** — the brainstorm document is the deliverable; keep it sharp
+- **Be flexible** - Go back and clarify when something doesn't make sense
