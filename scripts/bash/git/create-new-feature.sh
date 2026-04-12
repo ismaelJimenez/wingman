@@ -196,7 +196,7 @@ clean_branch_name() {
 # Source common.sh for resolve_template, json_escape, get_repo_root, has_git.
 #
 # Search locations in priority order:
-#  1. WINGMAN_ROOT/scripts/bash/common.sh (plugin context)
+#  1. ../common.sh relative to this script (plugin context — preferred)
 #  2. .wingman/scripts/bash/common.sh under the project root (installed project)
 #  3. scripts/bash/common.sh under the project root (source checkout fallback)
 #  4. git-common.sh next to this script (minimal fallback — lacks resolve_template)
@@ -219,8 +219,8 @@ _find_project_root() {
 _common_loaded=false
 _PROJECT_ROOT=$(_find_project_root "$SCRIPT_DIR") || true
 
-if [ -n "${WINGMAN_ROOT:-}" ] && [ -f "$WINGMAN_ROOT/scripts/bash/common.sh" ]; then
-    source "$WINGMAN_ROOT/scripts/bash/common.sh"
+if [ -f "$SCRIPT_DIR/../common.sh" ]; then
+    source "$SCRIPT_DIR/../common.sh"
     _common_loaded=true
 elif [ -n "$_PROJECT_ROOT" ] && [ -f "$_PROJECT_ROOT/.wingman/scripts/bash/common.sh" ]; then
     source "$_PROJECT_ROOT/.wingman/scripts/bash/common.sh"

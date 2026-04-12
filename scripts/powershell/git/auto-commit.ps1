@@ -30,6 +30,9 @@ $repoRoot = Find-ProjectRoot -StartDir $PSScriptRoot
 if (-not $repoRoot) { $repoRoot = Get-Location }
 Set-Location $repoRoot
 
+# Source common.ps1 for Get-PluginRoot
+. "$PSScriptRoot/../common.ps1"
+
 # Check if git is available
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
     Write-Warning "[specify] Warning: Git not found; skipped auto-commit"
@@ -45,8 +48,9 @@ try {
 }
 
 # Read per-command config from git-config.yml
-if ($env:WINGMAN_ROOT) {
-    $configFile = Join-Path $env:WINGMAN_ROOT "assets/git-config.yml"
+$pluginRoot = Get-PluginRoot
+if ($pluginRoot) {
+    $configFile = Join-Path $pluginRoot "assets/git-config.yml"
 } else {
     $configFile = Join-Path $repoRoot ".wingman/extensions/git/git-config.yml"
 }

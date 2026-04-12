@@ -89,7 +89,7 @@ IFLOW_FILE="$REPO_ROOT/IFLOW.md"
 FORGE_FILE="$AGENTS_FILE"
 
 # Template file (read-only bundled asset — always resolved from plugin)
-TEMPLATE_FILE="$WINGMAN_ROOT/assets/templates/agent-file-template.md"
+TEMPLATE_FILE="$(get_plugin_root)/assets/templates/agent-file-template.md"
 
 # Global variables for parsed plan data
 NEW_LANG=""

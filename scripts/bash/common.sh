@@ -1,6 +1,28 @@
 #!/usr/bin/env bash
 # Common functions and variables for all scripts
 
+# Resolve the plugin root directory.
+# Honors WINGMAN_ROOT env var if set; otherwise self-discovers from script location.
+get_plugin_root() {
+    if [ -n "${WINGMAN_ROOT:-}" ]; then
+        echo "$WINGMAN_ROOT"
+        return
+    fi
+    # Self-discovery: resolve BASH_SOURCE[0] through symlinks
+    local source_file="${BASH_SOURCE[0]}"
+    while [ -L "$source_file" ]; do
+        local dir
+        dir="$(cd -P "$(dirname "$source_file")" && pwd)"
+        source_file="$(readlink "$source_file")"
+        # Handle relative symlink targets
+        [[ "$source_file" != /* ]] && source_file="$dir/$source_file"
+    done
+    local script_dir
+    script_dir="$(cd -P "$(dirname "$source_file")" && pwd)"
+    # common.sh is at scripts/bash/common.sh — go up 2 levels to plugin root
+    (cd -P "$script_dir/../.." && pwd)
+}
+
 # Find repository root by searching upward for .wingman directory
 # This is the primary marker for spec-kit projects
 find_specify_root() {

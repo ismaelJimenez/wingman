@@ -26,9 +26,6 @@ Invoke `wingman:git-commit` with event `before_plan` before proceeding.
 
 1. **Setup**: Run `${CLAUDE_PLUGIN_ROOT}/scripts/bash/setup-plan.sh --json` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-   **IMPORTANT**: Before running scripts, set the environment variable:
-   - **Bash**: `export WINGMAN_ROOT="${CLAUDE_PLUGIN_ROOT}"`
-   - **PowerShell**: `$env:WINGMAN_ROOT = "${CLAUDE_PLUGIN_ROOT}"`
 
 2. **Load context**: Read FEATURE_SPEC and `${CLAUDE_PLUGIN_ROOT}/assets/memory/constitution.md`. Load IMPL_PLAN template (already copied).
 
@@ -87,9 +84,6 @@ Invoke `wingman:git-commit` with event `before_plan` before proceeding.
 
 3. **Agent context update**:
    - Run `${CLAUDE_PLUGIN_ROOT}/scripts/bash/update-agent-context.sh claude`
-
-   **IMPORTANT**: Before running, set the environment variable:
-   - **Bash**: `export WINGMAN_ROOT="${CLAUDE_PLUGIN_ROOT}"`
 
    - These scripts detect which AI agent is in use
    - Update the appropriate agent-specific context file

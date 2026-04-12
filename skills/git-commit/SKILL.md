@@ -30,9 +30,6 @@ This skill is invoked after (or before) core commands. It:
 
 Determine the event name from the skill that invoked this, then run the script:
 
-**IMPORTANT**: Before running scripts, set the environment variable:
-- **Bash**: `export WINGMAN_ROOT="${CLAUDE_PLUGIN_ROOT}"`
-- **PowerShell**: `$env:WINGMAN_ROOT = "${CLAUDE_PLUGIN_ROOT}"`
 
 - **Bash**: `${CLAUDE_PLUGIN_ROOT}/scripts/bash/git/auto-commit.sh <event_name>`
 - **PowerShell**: `${CLAUDE_PLUGIN_ROOT}/scripts/powershell/git/auto-commit.ps1 <event_name>`

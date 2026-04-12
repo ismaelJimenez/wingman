@@ -26,9 +26,6 @@ Invoke `wingman:git-commit` with event `before_tasks` before proceeding.
 
 1. **Setup**: Run `${CLAUDE_PLUGIN_ROOT}/scripts/bash/check-prerequisites.sh --json` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-   **IMPORTANT**: Before running scripts, set the environment variable:
-   - **Bash**: `export WINGMAN_ROOT="${CLAUDE_PLUGIN_ROOT}"`
-   - **PowerShell**: `$env:WINGMAN_ROOT = "${CLAUDE_PLUGIN_ROOT}"`
 
 2. **Load design documents**: Read from FEATURE_DIR:
    - **Required**: plan.md (tech stack, libraries, structure), spec.md (user stories with priorities)

@@ -19,9 +19,6 @@ Run the appropriate script from the project root:
 - **Bash**: `${CLAUDE_PLUGIN_ROOT}/scripts/bash/git/initialize-repo.sh`
 - **PowerShell**: `${CLAUDE_PLUGIN_ROOT}/scripts/powershell/git/initialize-repo.ps1`
 
-**IMPORTANT**: Before running scripts, set the environment variable:
-- **Bash**: `export WINGMAN_ROOT="${CLAUDE_PLUGIN_ROOT}"`
-- **PowerShell**: `$env:WINGMAN_ROOT = "${CLAUDE_PLUGIN_ROOT}"`
 
 If the extension scripts are not found, fall back to:
 - **Bash**: `git init && git add . && git commit -m "Initial commit from Specify template"`

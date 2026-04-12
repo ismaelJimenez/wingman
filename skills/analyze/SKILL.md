@@ -38,9 +38,6 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 
 Run `${CLAUDE_PLUGIN_ROOT}/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
 
-**IMPORTANT**: Before running scripts, set the environment variable:
-- **Bash**: `export WINGMAN_ROOT="${CLAUDE_PLUGIN_ROOT}"`
-- **PowerShell**: `$env:WINGMAN_ROOT = "${CLAUDE_PLUGIN_ROOT}"`
 
 - SPEC = FEATURE_DIR/spec.md
 - PLAN = FEATURE_DIR/plan.md

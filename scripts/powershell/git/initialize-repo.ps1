@@ -25,10 +25,14 @@ $repoRoot = Find-ProjectRoot -StartDir $PSScriptRoot
 if (-not $repoRoot) { $repoRoot = Get-Location }
 Set-Location $repoRoot
 
+# Source common.ps1 for Get-PluginRoot
+. "$PSScriptRoot/../common.ps1"
+
 # Read commit message from extension config, fall back to default
 $commitMsg = "[Spec Kit] Initial commit"
-if ($env:WINGMAN_ROOT) {
-    $configFile = Join-Path $env:WINGMAN_ROOT "assets/git-config.yml"
+$pluginRoot = Get-PluginRoot
+if ($pluginRoot) {
+    $configFile = Join-Path $pluginRoot "assets/git-config.yml"
 } else {
     $configFile = Join-Path $repoRoot ".wingman/extensions/git/git-config.yml"
 }

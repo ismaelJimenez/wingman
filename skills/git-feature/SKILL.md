@@ -47,9 +47,6 @@ Generate a concise short name (2-4 words) for the branch:
 - Use action-noun format when possible (e.g., "add-user-auth", "fix-payment-bug")
 - Preserve technical terms and acronyms (OAuth2, API, JWT, etc.)
 
-**IMPORTANT**: Before running scripts, set the environment variable:
-- **Bash**: `export WINGMAN_ROOT="${CLAUDE_PLUGIN_ROOT}"`
-- **PowerShell**: `$env:WINGMAN_ROOT = "${CLAUDE_PLUGIN_ROOT}"`
 
 Run the appropriate script based on your platform:
 

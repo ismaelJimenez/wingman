@@ -7,6 +7,7 @@
 set -e
 
 SCRIPT_DIR="$(CDPATH="" cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../common.sh"
 
 # Find project root
 _find_project_root() {
@@ -26,8 +27,9 @@ cd "$REPO_ROOT"
 
 # Read commit message from extension config, fall back to default
 COMMIT_MSG="[Spec Kit] Initial commit"
-if [ -n "${WINGMAN_ROOT:-}" ]; then
-    _config_file="$WINGMAN_ROOT/assets/git-config.yml"
+_plugin_root="$(get_plugin_root)"
+if [ -n "$_plugin_root" ]; then
+    _config_file="$_plugin_root/assets/git-config.yml"
 else
     _config_file="$REPO_ROOT/.wingman/extensions/git/git-config.yml"
 fi

@@ -15,6 +15,7 @@ if [ -z "$EVENT_NAME" ]; then
 fi
 
 SCRIPT_DIR="$(CDPATH="" cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../common.sh"
 
 _find_project_root() {
     local dir="$1"
@@ -43,8 +44,9 @@ if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
 fi
 
 # Read per-command config from git-config.yml
-if [ -n "${WINGMAN_ROOT:-}" ]; then
-    _config_file="$WINGMAN_ROOT/assets/git-config.yml"
+_plugin_root="$(get_plugin_root)"
+if [ -n "$_plugin_root" ]; then
+    _config_file="$_plugin_root/assets/git-config.yml"
 else
     _config_file="$REPO_ROOT/.wingman/extensions/git/git-config.yml"
 fi

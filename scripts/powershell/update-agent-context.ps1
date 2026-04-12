@@ -70,7 +70,7 @@ $IFLOW_FILE    = Join-Path $REPO_ROOT 'IFLOW.md'
 $FORGE_FILE    = Join-Path $REPO_ROOT 'AGENTS.md'
 
 # Template file (read-only bundled asset — always resolved from plugin)
-$TEMPLATE_FILE = Join-Path $env:WINGMAN_ROOT 'assets/templates/agent-file-template.md'
+$TEMPLATE_FILE = Join-Path (Get-PluginRoot) 'assets/templates/agent-file-template.md'
 
 # Parsed plan data placeholders
 $script:NEW_LANG = ''

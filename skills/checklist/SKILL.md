@@ -49,9 +49,6 @@ Invoke `wingman:git-commit` with event `before_checklist` before proceeding.
    - All file paths must be absolute.
    - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-   **IMPORTANT**: Before running scripts, set the environment variable:
-   - **Bash**: `export WINGMAN_ROOT="${CLAUDE_PLUGIN_ROOT}"`
-   - **PowerShell**: `$env:WINGMAN_ROOT = "${CLAUDE_PLUGIN_ROOT}"`
 
 2. **Clarify intent (dynamic)**: Derive up to THREE initial contextual clarifying questions (no pre-baked catalog). They MUST:
    - Be generated from the user's phrasing + extracted signals from spec/plan/tasks

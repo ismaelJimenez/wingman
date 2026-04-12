@@ -151,7 +151,7 @@ function ConvertTo-CleanBranchName {
 # ---------------------------------------------------------------------------
 # Source common.ps1 from the project's installed scripts.
 # Search locations in priority order:
-#  1. WINGMAN_ROOT/scripts/powershell/common.ps1 (plugin context)
+#  1. ../common.ps1 relative to this script (plugin context — preferred)
 #  2. .wingman/scripts/powershell/common.ps1 under the project root
 #  3. scripts/powershell/common.ps1 under the project root (source checkout)
 #  4. git-common.ps1 next to this script (minimal fallback)
@@ -174,8 +174,8 @@ function Find-ProjectRoot {
 $projectRoot = Find-ProjectRoot -StartDir $PSScriptRoot
 $commonLoaded = $false
 
-if ($env:WINGMAN_ROOT -and (Test-Path (Join-Path $env:WINGMAN_ROOT "scripts/powershell/common.ps1"))) {
-    . (Join-Path $env:WINGMAN_ROOT "scripts/powershell/common.ps1")
+if (Test-Path "$PSScriptRoot/../common.ps1") {
+    . "$PSScriptRoot/../common.ps1"
     $commonLoaded = $true
 } elseif ($projectRoot) {
     $candidates = @(

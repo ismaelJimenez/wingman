@@ -1,6 +1,16 @@
 #!/usr/bin/env pwsh
 # Common PowerShell functions analogous to common.sh
 
+# Resolve the plugin root directory.
+# Honors $env:WINGMAN_ROOT if set; otherwise self-discovers from script location.
+function Get-PluginRoot {
+    if ($env:WINGMAN_ROOT -and $env:WINGMAN_ROOT.Trim() -ne '') {
+        return $env:WINGMAN_ROOT
+    }
+    # Self-discovery: common.ps1 is at scripts/powershell/common.ps1 — go up 2 levels
+    return (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
+}
+
 # Find repository root by searching upward for .wingman directory
 # This is the primary marker for spec-kit projects
 function Find-SpecifyRoot {
