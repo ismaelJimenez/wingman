@@ -45,7 +45,10 @@ Invoke `wingman:git-commit` with event `before_checklist` before proceeding.
 
 ## Execution Steps
 
-1. **Setup**: Run `${CLAUDE_PLUGIN_ROOT}/scripts/bash/check-prerequisites.sh --json` from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS list.
+1. **Setup**: Run the prerequisites script from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS list.
+
+   - **Bash**: `${CLAUDE_PLUGIN_ROOT}/scripts/bash/check-prerequisites.sh --json`
+   - **PowerShell**: `${CLAUDE_PLUGIN_ROOT}/scripts/powershell/check-prerequisites.ps1 -Json`
    - All file paths must be absolute.
    - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 

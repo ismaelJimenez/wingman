@@ -36,7 +36,12 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 
 ### 1. Initialize Analysis Context
 
-Run `${CLAUDE_PLUGIN_ROOT}/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
+Run the prerequisites script once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS:
+
+- **Bash**: `${CLAUDE_PLUGIN_ROOT}/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks`
+- **PowerShell**: `${CLAUDE_PLUGIN_ROOT}/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks`
+
+Derive absolute paths:
 
 
 - SPEC = FEATURE_DIR/spec.md

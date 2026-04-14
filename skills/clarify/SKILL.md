@@ -30,7 +30,10 @@ Note: This clarification workflow is expected to run (and be completed) BEFORE i
 
 Execution steps:
 
-1. Run `${CLAUDE_PLUGIN_ROOT}/scripts/bash/check-prerequisites.sh --json --paths-only` from repo root **once** (combined `--json --paths-only` mode / `-Json -PathsOnly`). Parse minimal JSON payload fields:
+1. Run the prerequisites script from repo root **once** (combined JSON + paths-only mode). Parse minimal JSON payload fields:
+
+   - **Bash**: `${CLAUDE_PLUGIN_ROOT}/scripts/bash/check-prerequisites.sh --json --paths-only`
+   - **PowerShell**: `${CLAUDE_PLUGIN_ROOT}/scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly`
    - `FEATURE_DIR`
    - `FEATURE_SPEC`
    - (Optionally capture `IMPL_PLAN`, `TASKS` for future chained flows.)
